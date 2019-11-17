@@ -34,7 +34,7 @@ namespace Hunter.Api.Repositories.Base
         {
             string tableName = typeof(T).Name;
             int res = DB.GetCommand(DB.createInsertQuery(tableName, fields)).ExecuteNonQuery();
-            DB.CloseConnection();
+            //DB.CloseConnection();
             return res;
         }
 
@@ -42,7 +42,7 @@ namespace Hunter.Api.Repositories.Base
         {
             string tableName = typeof(T).Name;
             int res = DB.GetCommand(DB.createUpdateQuery(tableName,fieldUpdates,whereFilter)).ExecuteNonQuery();
-            DB.CloseConnection();
+            //DB.CloseConnection();
             return res;
         }
 
@@ -50,7 +50,7 @@ namespace Hunter.Api.Repositories.Base
         {
             string tableName = typeof(T).Name;
             int res = DB.GetCommand(DB.createDeleteQuery(tableName, whereFilter)).ExecuteNonQuery();
-            DB.CloseConnection();
+            //DB.CloseConnection();
             return res;
         }
 
