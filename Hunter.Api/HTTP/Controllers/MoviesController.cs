@@ -19,10 +19,10 @@ namespace Hunter.Api.HTTP.Controllers
         [HttpGet]
         public ActionResult Get()
         {
-            return Ok(ApiResponse.Send(Repo.Get<DTO.MovieDto>(
+            return Ok(Repo.Get<DTO.MovieDto>(
                 new List<string>() { "Movies.Id", "Title", "GenreId", "ReleaseDate", "Photo", "Name" },
                 new Dictionary<string, string>() { { "Genres", "Id" } }
-                )));
+                ));
         }
     }
 }
