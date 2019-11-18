@@ -10,6 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Hunter.Api.Repositories.Base;
+using Hunter.Api.HTTP.Middlewares;
 
 namespace Hunter.Api
 {
@@ -25,6 +27,9 @@ namespace Hunter.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc(config => config.Filters.Add(typeof(GlobalExceptionHandler)));
+            services.AddTransient<Database.Engine.IDataAccess, Database.Engine.DataAccess>();
+            services.AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<>));
             services.AddControllers();
         }
 
@@ -39,6 +44,8 @@ namespace Hunter.Api
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(x => x.AllowAnyOrigin());
 
             app.UseAuthorization();
 
