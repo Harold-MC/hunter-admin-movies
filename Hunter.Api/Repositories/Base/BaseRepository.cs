@@ -25,7 +25,8 @@ namespace Hunter.Api.Repositories.Base
         public List<U> Get<U>(List<string> fields, Dictionary<string, string> joinTables)
         {
             string tableName = typeof(U).Name.Replace("Dto", "");
-            var reader = DB.GetCommand(DB.createGetQueryWithJoin(tableName, fields, joinTables)).ExecuteReader();
+            string query = DB.createGetQueryWithJoin(tableName, fields, joinTables);
+            var reader = DB.GetCommand(query).ExecuteReader();
             //DB.CloseConnection();
             return Map<U>(reader);
         }

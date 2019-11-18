@@ -36,5 +36,11 @@ create table Movies_Actors(
 );
 go
 create index name_actor_idx on Actors(Name);
-go
 create index name_movie_idx on Movies(Title)
+go
+insert into actors values('Harold Cordero', sysdatetime(), 'm', 'harold.jpg');
+insert into actors values('Miguel Rondon', sysdatetime(), 'm', 'miguel.jpg');
+insert into genres values('Horror')
+insert into genres values('Comedy')
+insert into movies values('Scary Movie', 1, sysdatetime(), 'scary.jpg')
+insert into movies values('King Kong', 2, sysdatetime(), 'king.jpg')

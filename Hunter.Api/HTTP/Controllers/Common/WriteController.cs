@@ -27,13 +27,13 @@ namespace Hunter.Api.HTTP.Controllers.Common
         }
 
         [HttpPost]
-        public ActionResult Insert(List<string> values)
+        public ActionResult Insert([FromBody]List<string> values)
         {
             return Ok(ApiResponse.Send(Repo.Insert(values)));
         }
 
         [HttpPut("{id}")]
-        public ActionResult Update(int id, [FromBody]Dictionary<string, string> fieldUpdates)
+        public ActionResult Update([FromBody]Dictionary<string, string> fieldUpdates, int id)
         {
             return Ok(ApiResponse.Send(Repo.Update(fieldUpdates, new Dictionary<string, string>() { { "Id", $"{id}" } })));
         }

@@ -28,7 +28,7 @@ namespace Hunter.Api.Extensions
             string str = "";
             foreach (string field in values)
             {
-                str += $"{field}";
+                str += $"'{field}'";
                 if (field != values.Last()) str += ",";
             }
             return $"insert into {tableName}s values ({str})";
@@ -64,10 +64,15 @@ namespace Hunter.Api.Extensions
             {
                 if (where.Key == whereFilter.Last().Key) separate = "";
 
-                str += $" {where.Key} = {where.Value} {separate}";
+                str += $" {where.Key} = '{where.Value}' {separate}";
             }
 
             return str;
+        }
+
+        public static string createLikeFilter(this IDataAccess accesor, KeyValuePair<string, string>? like)
+        {
+            return $" where {like.Value.Key} like '%{like.Value.Value}%'";
         }
     }
 }
