@@ -21,5 +21,12 @@ namespace Hunter.Api.HTTP.Controllers
         {
             return Ok(ApiResponse.Send(Repo.Get()));
         }
+
+        [HttpGet("{id}")]
+        public ActionResult Get(int id)
+        {
+            var result = Repo.Get().FirstOrDefault(x => x.Id == id);
+            return Ok(ApiResponse.Send(result));
+        }
     }
 }

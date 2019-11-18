@@ -19,22 +19,23 @@ namespace Hunter.Api.HTTP.Controllers.Common
             Repo = _repo;
         }
 
-        [HttpDelete]
-        public ActionResult Delete()
+        [HttpDelete("{id}")]
+        public ActionResult Delete(int id)
         {
-            return Ok(ApiResponse.Send(Repo.Delete(null)));
+            var filter = new Dictionary<string, string>() { {"id", id.ToString()} };
+            return Ok(ApiResponse.Send(Repo.Delete(filter)));
         }
 
         [HttpPost]
-        public ActionResult Insert()
+        public ActionResult Insert([FromBody]List<string> values)
         {
-            return Ok(ApiResponse.Send(Repo.Insert(null)));
+            return Ok(ApiResponse.Send(Repo.Insert(values)));
         }
 
-        [HttpPut]
-        public ActionResult Update()
+        [HttpPut("{id}")]
+        public ActionResult Update([FromBody]Dictionary<string, string> fieldUpdates, int id)
         {
-            return Ok(ApiResponse.Send(Repo.Update(null, null)));
+            return Ok(ApiResponse.Send(Repo.Update(fieldUpdates, new Dictionary<string, string>() { { "Id", $"{id}" } })));
         }
     }
 }
